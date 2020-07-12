@@ -63,4 +63,12 @@ class FrontPageController extends Controller
     	session::flash('type','danger');
     	return redirect()->back();
     }
+    public function logout()
+    {
+    	auth()->logout();
+    	session::flash('message', 'user logout');
+    	session::flash('type','success');
+    	return redirect()->route('login.path');
+    }
+    
 }

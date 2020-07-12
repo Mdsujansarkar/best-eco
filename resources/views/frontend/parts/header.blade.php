@@ -31,9 +31,19 @@
             <div class="col-sm-4 offset-md-1 py-4">
 
               <ul class="list-unstyled">
+                @auth()
+                <li>
+                  <a href="{{route('profile')}}" class="text-white">
+                  Profile ({{ optional(auth()->user())->full_name }})
+                  </a>
+                </li>
+                <li><a href="{{route('logout')}}" class="text-white">Logout</a></li>
+                @endauth
+                @guest()
                 <li><a href="{{route('login.path')}}" class="text-white">Login</a></li>
                 <li><a href="{{route('register.path')}}" class="text-white">Register</a></li>
                 <li><a href="#" class="text-white">Email me</a></li>
+                @endguest
               </ul>
             </div>
           </div>
