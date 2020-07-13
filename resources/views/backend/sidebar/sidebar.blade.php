@@ -36,6 +36,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Add Category:</h6>
             <a class="collapse-item" href="{{ route('category.index')}}">Insert Category</a>
+            <a class="collapse-item" href="{{ route('category.manage')}}">Manage Category</a>
    
           </div>
         </div>

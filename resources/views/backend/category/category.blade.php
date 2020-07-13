@@ -15,26 +15,34 @@
                <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+                @endif
+                @if(session()->has('message'))
+                  <div class="alert alert-{{ session('type') }}">
+                    {{ session('message')}}
+                  </div>
+                @endif
+                <h1 class="h4 text-gray-900 mb-4">Create Category</h1>
               </div>
-              <form class="user">
-               
+              <form class="user" action="{{route('category.create')}}" method="post">
+               @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Category Title">
-                </div>
-
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Category slug">
+                  <input type="text" class="form-control" name="name" value="{{ old('name')}}" placeholder="Category Title">
                 </div>
                 <div class="form-group">
-                  
-                  <label><input type="radio" name="optradio">Publish</label>
-                  <label><input type="radio" name="optradio">Unpublish</label>
+                 <select class="custom-select" name="status">
+                      <option value="1">Action</option>
+                      <option value="0">Inactive</option>
+                  </select>
                 </div>
-               
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Category Title
-                </a>
+                <button class="btn btn-primary btn-block" name="btn">Category Insert</button>
               </form>
              
             </div>

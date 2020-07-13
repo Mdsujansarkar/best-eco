@@ -27,3 +27,5 @@ Route::get('/admin', 						'AdminController@admin')					->name('admin');
 
 
 Route::get('/categories', 					'CategoryController@index')					->name('category.index');
+Route::post('/categories/add', 				'CategoryController@create')				->name('category.create');
+Route::get('/categories/manage', 			'CategoryController@manage')				->name('category.manage');
