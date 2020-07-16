@@ -29,3 +29,9 @@ Route::get('/admin', 						'AdminController@admin')					->name('admin');
 Route::get('/categories', 					'CategoryController@index')					->name('category.index');
 Route::post('/categories/add', 				'CategoryController@create')				->name('category.create');
 Route::get('/categories/manage', 			'CategoryController@manage')				->name('category.manage');
+Route::get('/category/edit/{id}', 			'CategoryController@edit')					->name('category.edit');
+Route::put('/category/update/{id}', 		'CategoryController@update')				->name('category.update');
+Route::delete('/category/delete/{id}', 		'CategoryController@delete')				->name('category.delete');
+Route::get('/category/inactive/{id}', 		'CategoryController@inactive')				->name('category.inactive');
+Route::get('/category/active/{id}', 		'CategoryController@active')				->name('category.active');
+

@@ -9,6 +9,20 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+               @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+                @endif
+                @if(session()->has('message'))
+                  <div class="alert alert-{{ session('type') }}">
+                    {{ session('message')}}
+                  </div>
+                @endif
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -40,10 +54,19 @@
                       <td>{{$category -> slug}}</td>
                       <td>{{$category -> status == 1 ? 'Active':'Inactive'}}</td>
                       <td>
-                      	<a href="" title="Edit"><i class="fas fa-edit"></i></a>
-                      	<a href="" title="Active"><i class="far fa-arrow-alt-circle-up"></i></a>
-                      	<a href="" title="Inactive"><i class="far fa-arrow-alt-circle-down"></i></a>
-                      	<a href="" title="Delete"><i class="far fa-trash-alt"></i></a>
+                      	<a href="{{route('category.edit', [ 'id' => $category -> id ] ) }}" class="btn btn-danger btn-block" title="Edit" role="button"><i class="fas fa-edit"></i></a>
+                        @if($category -> status == 1)
+                      	<a href="{{route('category.inactive', [ 'id' => $category -> id ])}}" class="btn btn-danger btn-block" title="Active"><i class="far fa-arrow-alt-circle-up"></i></a>
+                        @else
+                      	<a href="{{route('category.active', [ 'id' => $category -> id ])}}" class="btn btn-danger btn-block" title="Inactive"><i class="far fa-arrow-alt-circle-down"></i></a>
+                        @endif
+                        <form action="{{route('category.delete',[ 'id' => $category -> id ]) }}" method="post" style="margin-top:10px">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger btn-block">
+                              <i class="far fa-trash-alt"></i>
+                          </button>
+                        </form>
                       </td>
                     </tr>
                     @endforeach
